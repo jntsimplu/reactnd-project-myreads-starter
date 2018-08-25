@@ -10,7 +10,7 @@ class SearchPage extends Component {
 
 updateQuery = (query) => {
   this.setState({
-    query: query.trim()
+    query: query
   })
   this.getSearchedBooks(query);
 }
