@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import Book from './Book.js'
 
 class MainPage extends Component {
-  render() {
-    return (
+render() {
+  return (
       <div className="list-books">
         <div className="list-books-title">
           <h1>MyReads</h1>
@@ -22,6 +22,8 @@ class MainPage extends Component {
                       <li key={book.id} >
                         <Book
                           book={book}
+                          updateShelf={this.props.updateShelf}
+                          currentShelf={book.shelf}
                         />
                       </li>
                     ))
@@ -40,6 +42,8 @@ class MainPage extends Component {
                         <li key={book.id} >
                           <Book
                             book={book}
+                            updateShelf={this.props.updateShelf}
+                            currentShelf={book.shelf}
                           />
                         </li>
                       ))
@@ -58,6 +62,8 @@ class MainPage extends Component {
                       <li key={book.id} >
                         <Book
                           book={book}
+                          updateShelf={this.props.updateShelf}
+                          currentShelf={book.shelf}
                         />
                       </li>
                     ))

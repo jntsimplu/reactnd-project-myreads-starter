@@ -56,13 +56,17 @@ getSearchedBooks = (query) => {
         <div className="search-books-results">
           <ol className="books-grid">
             {
-              this.state.searchedBooks.map(SearchedBook => (
+              this.state.searchedBooks.map(SearchedBook => {
+              return(
                 <li key={SearchedBook.id}>
                   <Book
                     book={SearchedBook}
+                    updateShelf={this.props.updateShelf}
+                    currentShelf="none"
                   />
                 </li>
-              ))
+              );
+            })
             }
           </ol>
         </div>
