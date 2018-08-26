@@ -2,6 +2,27 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Book from './Book.js'
 
+const Shelf = ({ title, books, updateShelf, shelf }) => (
+  <div className="bookshelf">
+    <h2 className="bookshelf-title">{title}</h2>
+    <div className="bookshelf-books">
+      <ol className="books-grid">
+        {books
+          .filter(book => book.shelf === shelf)
+          .map(book => (
+            <li key={book.id} >
+              <Book
+                book={book}
+                updateShelf={updateShelf}
+                currentShelf={book.shelf}
+              />
+            </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+)
+
 class MainPage extends Component {
 render() {
   return (
@@ -11,66 +32,24 @@ render() {
         </div>
         <div className="list-books-content">
           <div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Currently Reading</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {
-                  this.props.books
-                    .filter(book => book.shelf === 'currentlyReading')
-                    .map(book => (
-                      <li key={book.id} >
-                        <Book
-                          book={book}
-                          updateShelf={this.props.updateShelf}
-                          currentShelf={book.shelf}
-                        />
-                      </li>
-                    ))
-                  }
-                </ol>
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Want to Read</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                    {
-                    this.props.books
-                      .filter(book => book.shelf === 'wantToRead')
-                      .map(book => (
-                        <li key={book.id} >
-                          <Book
-                            book={book}
-                            updateShelf={this.props.updateShelf}
-                            currentShelf={book.shelf}
-                          />
-                        </li>
-                      ))
-                    }
-                </ol>
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Read</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {
-                  this.props.books
-                    .filter(book => book.shelf === 'read')
-                    .map(book => (
-                      <li key={book.id} >
-                        <Book
-                          book={book}
-                          updateShelf={this.props.updateShelf}
-                          currentShelf={book.shelf}
-                        />
-                      </li>
-                    ))
-                  }
-                </ol>
-              </div>
-            </div>
+            <Shelf
+              title={'Currently Reading'}
+              books={this.props.books}
+              updateShelf={this.props.updateShelf}
+              shelf={'currentlyReading'}
+            />
+            <Shelf
+              title={'Want to Read'}
+              books={this.props.books}
+              updateShelf={this.props.updateShelf}
+              shelf={'wantToRead'}
+            />
+            <Shelf
+              title={'Read'}
+              books={this.props.books}
+              updateShelf={this.props.updateShelf}
+              shelf={'read'}
+            />
           </div>
         </div>
         <div className="open-search">
